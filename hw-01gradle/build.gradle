@@ -1,0 +1,23 @@
+plugins {
+    id 'java'
+    id 'application'
+    id 'idea'
+}
+
+mainClassName = 'Hello'
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'com.google.guava:guava:31.0.1-jre'
+}
+
+jar {
+    manifest {
+        attributes 'Main-class' : 'Hello'
+    }
+    from configurations.compileClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+}
